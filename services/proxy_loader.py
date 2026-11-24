@@ -6,12 +6,14 @@ from config import PROXY_LIST_URL
 
 def get_proxies():
     # сначала пробуем получить ответ
-    response = requests.get(PROXY_LIST_URL,timeout=15)
+    try:
+        response = requests.get(PROXY_LIST_URL,timeout=15)
 
-    # пытаемся получить статус ответа(если проблема оно само выкинет из функции)
-    response.raise_for_status()
+        # пытаемся получить статус ответа(если проблема оно само выкинет из функции)
+        response.raise_for_status()
 
-    print (response.text.splitlines())
-
-    return response.text.splitlines();
-
+        print (response.text.splitlines())
+        return response.text.splitlines()
+    except Exception:
+        raise 
+    
